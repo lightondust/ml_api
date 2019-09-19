@@ -1,12 +1,23 @@
-import modules
 import io
 import os
-from google.cloud import vision
 from google.cloud.vision import types
 from google.protobuf.json_format import MessageToDict
 
+KEY_PATH = '/home/sen/.ssh/test_machine_learning-c0d3e45f256b.json'
 
-client = vision.ImageAnnotatorClient()
+
+def set_env(key_path):
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = key_path
+
+
+def get_vision_client(key_path):
+    from google.cloud import vision
+    set_env(key_path)
+    client = vision.ImageAnnotatorClient()
+    return client
+
+
+client = get_vision_client(KEY_PATH)
 
 
 def label_image(client, image_path, label_type='label'):
@@ -55,3 +66,5 @@ def label_to_dict(labels, label_type='label'):
             label_trans.append(MessageToDict(label))
 
     return label_trans
+
+

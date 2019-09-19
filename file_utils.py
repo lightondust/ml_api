@@ -2,24 +2,8 @@ import os
 import json
 import pickle
 
-KEY_PATH = '/home/sen/.ssh/test_machine_learning-c0d3e45f256b.json'
-
 base_dir = '/media/data_disk2/sec/'
 label_dir = '/media/data_disk2/sec/labels/'
-
-
-def set_env(key_path):
-    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = key_path
-
-
-def get_vision_client(key_path):
-    from google.cloud import vision
-    set_env(key_path)
-    client = vision.ImageAnnotatorClient()
-    return client
-
-
-client = get_vision_client(KEY_PATH)
 
 
 def save_to_json(dict_obj, path):
